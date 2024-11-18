@@ -25,13 +25,13 @@ interface movieProps {
 const items = [
   {
     title: "Movies",
-    url: "#",
+    url: "/home/movies",
     icon: Clapperboard,
     id: 1,
   },
   {
     title: "Series",
-    url: "#",
+    url: "/home/series",
     icon: Tv,
     id: 2,
   },
@@ -43,7 +43,7 @@ const items = [
   },
   {
     title: "Playlist",
-    url: "/home",
+    url: "#",
     icon: Play,
     id: 4,
   },
