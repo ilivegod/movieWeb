@@ -16,6 +16,8 @@ import MovieCard from "@/components/MovieCard";
 import { Key, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import CardCarousel from "@/components/CardCarousel";
+import { EmblaOptionsType } from "embla-carousel";
 
 export default function RightHomePage() {
   interface Movie {
@@ -26,6 +28,14 @@ export default function RightHomePage() {
   }
 
   const params = useParams();
+
+  const handleMovieCardClick = () => {
+    console.log("Movie card clicked");
+  };
+
+  const OPTIONS: EmblaOptionsType = { dragFree: true };
+  const SLIDE_COUNT = 5;
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
   // {{{fetching movies data}}}
   const FetchNowPlayingMovies = async () => {
@@ -106,7 +116,7 @@ export default function RightHomePage() {
   const FetchUpcomingMovies = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
       headers: {
         accept: "application/json",
         Authorization:
@@ -167,6 +177,7 @@ export default function RightHomePage() {
                     className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                   >
                     <MovieCard
+                      CardClick={() => handleMovieCardClick()}
                       // title={movie?.original_title}
                       imageUrl={movie?.poster_path}
                     />
@@ -202,6 +213,7 @@ export default function RightHomePage() {
                     className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                   >
                     <MovieCard
+                      CardClick={() => handleMovieCardClick()}
                       // title={movie?.original_title}
                       imageUrl={movie?.poster_path}
                     />
@@ -237,6 +249,7 @@ export default function RightHomePage() {
                     className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                   >
                     <MovieCard
+                      CardClick={() => handleMovieCardClick()}
                       // title={movie?.original_title}
                       imageUrl={movie?.poster_path}
                     />
@@ -257,30 +270,32 @@ export default function RightHomePage() {
         <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
           Top Rated Movies
         </h1>
-        <div className="md:mt-8 w-full ">
+        <div className="md:mt-8 w-full mb-12">
           {TopRatedMoviesData && TopRatedMoviesData.length > 0 ? (
-            <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
-                {TopRatedMoviesData.map((movie: Movie) => (
-                  <CarouselItem
-                    key={movie.id}
-                    className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                  >
-                    <MovieCard
-                      // title={movie?.original_title}
-                      imageUrl={movie?.poster_path}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+            // <Carousel
+            //   opts={{
+            //     align: "start",
+            //   }}
+            //   className="w-full"
+            // >
+            //   <CarouselContent className="bg-blue-200">
+            //     {TopRatedMoviesData.map((movie: Movie) => (
+            //       <CarouselItem
+            //         key={movie.id}
+            //         className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 bg-yellow-200"
+            //       >
+            //         <MovieCard
+            //           CardClick={() => handleMovieCardClick()}
+            //           // title={movie?.original_title}
+            //           imageUrl={movie?.poster_path}
+            //         />
+            //       </CarouselItem>
+            //     ))}
+            //   </CarouselContent>
+            //   <CarouselPrevious />
+            //   <CarouselNext />
+            // </Carousel>
+            <CardCarousel slides={SLIDES} options={OPTIONS} />
           ) : (
             <div className="text-white">No movies available</div>
           )}
