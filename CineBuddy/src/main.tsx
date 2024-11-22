@@ -8,6 +8,7 @@ import MovieDetailPage from "./pages/MovieDetailPage.tsx";
 import ErrorPage from "./error-page.tsx";
 import RightHomePage from "./pages/RightHomePage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import RightHomePageSeries from "./pages/RightHomePageSeries.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/home/:homeId",
         element: <RightHomePage />,
+      },
+      {
+        path: "/series",
+        element: <RightHomePageSeries />,
       },
     ],
   },

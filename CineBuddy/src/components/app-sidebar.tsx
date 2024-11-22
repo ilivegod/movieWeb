@@ -31,22 +31,22 @@ const items = [
   },
   {
     title: "Series",
-    url: "/home/series",
+    url: "/series",
     icon: Tv,
     id: 2,
   },
-  {
-    title: "Watchlist",
-    url: "#",
-    icon: Heart,
-    id: 3,
-  },
-  {
-    title: "Playlist",
-    url: "#",
-    icon: Play,
-    id: 4,
-  },
+  // {
+  //   title: "Watchlist",
+  //   url: "#",
+  //   icon: Heart,
+  //   id: 3,
+  // },
+  // {
+  //   title: "Playlist",
+  //   url: "#",
+  //   icon: Play,
+  //   id: 4,
+  // },
 ];
 
 export function AppSidebar({ movies, tryr }: any) {

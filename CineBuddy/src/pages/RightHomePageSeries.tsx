@@ -21,7 +21,7 @@ import { EmblaOptionsType } from "embla-carousel";
 
 import React from "react";
 
-export default function RightHomePage() {
+export default function RightHomePageSeries() {
   interface Movie {
     id: number;
     original_title: string;
@@ -35,7 +35,7 @@ export default function RightHomePage() {
     id: string;
   }
 
-  const params = useParams();
+  // const params = useParams();
 
   const handleMovieCardClick = () => {
     console.log("Movie card clicked");
@@ -46,10 +46,10 @@ export default function RightHomePage() {
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
   // {{{fetching movies data}}}
-  const FetchNowPlayingMovies = async () => {
+  const FetchAiringTodaySeries = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1",
       headers: {
         accept: "application/json",
         Authorization:
@@ -63,18 +63,18 @@ export default function RightHomePage() {
   };
 
   const {
-    isPending: NowPlayingMoviesIsPending,
-    error: NowPlayingMoviesError,
-    data: NowPlayingMoviesData,
+    isPending: AiringTodaySeriesIsPending,
+    error: AiringTodaySeriesError,
+    data: AiringTodaySeriesData,
   } = useQuery({
     queryKey: ["NowPlayingMovies"],
-    queryFn: FetchNowPlayingMovies,
+    queryFn: FetchAiringTodaySeries,
   });
 
-  const FetchPopularMovies = async () => {
+  const FetchOnTheAirSeries = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1",
       headers: {
         accept: "application/json",
         Authorization:
@@ -88,18 +88,18 @@ export default function RightHomePage() {
   };
 
   const {
-    isPending: PopularMoviesIsPending,
-    error: PopularMoviesError,
-    data: PopularMoviesData,
+    isPending: OnTheAirSeriesIsPending,
+    error: OnTheAirSeriesError,
+    data: OnTheAirSeriesData,
   } = useQuery({
     queryKey: ["PopularMovies"],
-    queryFn: FetchPopularMovies,
+    queryFn: FetchOnTheAirSeries,
   });
 
-  const FetchTopRatedMovies = async () => {
+  const FetchPopularSeries = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
       headers: {
         accept: "application/json",
         Authorization:
@@ -113,18 +113,18 @@ export default function RightHomePage() {
   };
 
   const {
-    isPending: TopRatedMoviesIsPending,
-    error: TopRatedMoviesError,
-    data: TopRatedMoviesData,
+    isPending: PopularSeriesIsPending,
+    error: PopularSeriesError,
+    data: PopularSeriesData,
   } = useQuery({
     queryKey: ["TopRatedMovies"],
-    queryFn: FetchTopRatedMovies,
+    queryFn: FetchPopularSeries,
   });
 
-  const FetchUpcomingMovies = async () => {
+  const TopRatedSeries = async () => {
     const options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
       headers: {
         accept: "application/json",
         Authorization:
@@ -138,12 +138,12 @@ export default function RightHomePage() {
   };
 
   const {
-    isPending: UpcomingMoviesIsPending,
-    error: UpcomingMoviesError,
-    data: UpcomingMoviesData,
+    isPending: TopRatedSeriesIsPending,
+    error: TopRatedSeriesError,
+    data: TopRatedSeriesData,
   } = useQuery({
     queryKey: ["UpcomingMovies"],
-    queryFn: FetchUpcomingMovies,
+    queryFn: TopRatedSeries,
   });
 
   return (
@@ -164,48 +164,48 @@ export default function RightHomePage() {
       <div className="">
         <CustomCarousel />
       </div>
-      {/* {Now Playing area} */}
+      {/* { Airing today area} */}
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
         <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Now Playing{params?.homeId}
+          Airing Today
         </h1>
 
         <div className="md:mt-8 w-full mb-12">
-          {NowPlayingMoviesData && NowPlayingMoviesData.length > 0 ? (
+          {AiringTodaySeriesData && AiringTodaySeriesData.length > 0 ? (
             <div>
-              <CardCarousel slides={NowPlayingMoviesData} />
+              <CardCarousel slides={AiringTodaySeriesData} />
             </div>
           ) : (
             <div className="text-white">No movies available</div>
           )}
         </div>
       </div>
-      {/* {Popular area} */}
+      {/* {On the air area} */}
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
         <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Popular Movies
+          On-the-Air
         </h1>
         <div className="md:mt-8 w-full mb-12">
-          {PopularMoviesData && PopularMoviesData.length > 0 ? (
+          {OnTheAirSeriesData && OnTheAirSeriesData.length > 0 ? (
             <div>
-              <CardCarousel slides={PopularMoviesData} />
+              <CardCarousel slides={OnTheAirSeriesData} />
             </div>
           ) : (
             <div className="text-white">No movies available</div>
           )}
         </div>
       </div>
-      {/* {Upcoming Movies area} */}
+      {/* {Popular Tv Shows  area} */}
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
         <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Upcoming Movies
+          Popular Tv Shows
         </h1>
         <div className="md:mt-8 w-full mb-12">
-          {UpcomingMoviesData && UpcomingMoviesData.length > 0 ? (
+          {PopularSeriesData && PopularSeriesData.length > 0 ? (
             <div>
-              <CardCarousel slides={UpcomingMoviesData} />
+              <CardCarousel slides={PopularSeriesData} />
             </div>
           ) : (
             <div className="text-white">No movies available</div>
@@ -216,12 +216,12 @@ export default function RightHomePage() {
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
         <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Top Rated Movies
+          Top Rated Tv
         </h1>
         <div className="md:mt-8 w-full mb-12">
-          {TopRatedMoviesData && TopRatedMoviesData.length > 0 ? (
+          {TopRatedSeriesData && TopRatedSeriesData.length > 0 ? (
             <div>
-              <CardCarousel slides={TopRatedMoviesData} />
+              <CardCarousel slides={TopRatedSeriesData} />
             </div>
           ) : (
             <div className="text-white">No movies available</div>
