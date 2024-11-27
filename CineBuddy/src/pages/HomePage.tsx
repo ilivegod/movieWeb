@@ -42,7 +42,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex bg-stone-950">
+    <div className="flex bg-neutral-950">
       <div className="flex flex-col">
         <SidebarProvider>
           <AppSidebar movies={movies} tryr="try" />

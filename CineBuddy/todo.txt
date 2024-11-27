@@ -1,0 +1,5 @@
+[] Do movie Screen
+    [] do ui
+    [] bring along the id when clicking on the movie poster in the homepage
+    [] receive the data and call the api
+    [] populate the ui with the data from the api

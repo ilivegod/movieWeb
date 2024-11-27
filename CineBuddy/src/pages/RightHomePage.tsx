@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { Search, CircleUserRound, Bell } from "lucide-react";
+import { Search, CircleUserRound, Bell, ChevronRight } from "lucide-react";
 import CustomCarousel from "@/components/CustomCarousel";
 import MovieCard from "@/components/MovieCard";
 import { Key, useState } from "react";
@@ -23,10 +23,10 @@ import React from "react";
 
 export default function RightHomePage() {
   interface Movie {
-    id: number;
-    original_title: string;
-    date: number;
-    poster_path: string;
+    id?: number;
+    original_title?: string;
+    date?: number;
+    poster_path?: string;
   }
 
   interface slideType {
@@ -137,6 +137,10 @@ export default function RightHomePage() {
     return res.data.results;
   };
 
+  const handleCardClick = (id: string) => {
+    console.log(id);
+  };
+
   const {
     isPending: UpcomingMoviesIsPending,
     error: UpcomingMoviesError,
@@ -166,9 +170,17 @@ export default function RightHomePage() {
       </div>
       {/* {Now Playing area} */}
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
-        <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Now Playing{params?.homeId}
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
+            Now Playing
+          </h1>
+          <div className="flex items-center justify-center  ">
+            <p className="text-white text-lg sm:text-sm tracking-wider">
+              All Movies
+            </p>
+            <ChevronRight color="white" size={15} />
+          </div>
+        </div>
 
         <div className="md:mt-8 w-full mb-12">
           {NowPlayingMoviesData && NowPlayingMoviesData.length > 0 ? (
@@ -183,9 +195,17 @@ export default function RightHomePage() {
       {/* {Popular area} */}
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
-        <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Popular Movies
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
+            Popular Movies
+          </h1>
+          <div className="flex items-center justify-center  ">
+            <p className="text-white text-lg sm:text-sm tracking-wider">
+              All Movies
+            </p>
+            <ChevronRight color="white" size={15} />
+          </div>
+        </div>
         <div className="md:mt-8 w-full mb-12">
           {PopularMoviesData && PopularMoviesData.length > 0 ? (
             <div>
@@ -199,9 +219,17 @@ export default function RightHomePage() {
       {/* {Upcoming Movies area} */}
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
-        <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Upcoming Movies
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
+            Upcoming Movies
+          </h1>
+          <div className="flex items-center justify-center  ">
+            <p className="text-white text-lg sm:text-sm tracking-wider">
+              All Movies
+            </p>
+            <ChevronRight color="white" size={15} />
+          </div>
+        </div>
         <div className="md:mt-8 w-full mb-12">
           {UpcomingMoviesData && UpcomingMoviesData.length > 0 ? (
             <div>
@@ -215,9 +243,17 @@ export default function RightHomePage() {
       {/* {Top Rated area} */}
 
       <div className="md:mt-[100px] mt-7 md:px-14 px-3">
-        <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
-          Top Rated Movies
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-white font-bold text-xl sm:text-2xl  tracking-wider">
+            Top Rated Movies
+          </h1>
+          <div className="flex items-center justify-center  ">
+            <p className="text-white text-lg sm:text-sm tracking-wider">
+              All Movies
+            </p>
+            <ChevronRight color="white" size={15} />
+          </div>
+        </div>
         <div className="md:mt-8 w-full mb-12">
           {TopRatedMoviesData && TopRatedMoviesData.length > 0 ? (
             <div>

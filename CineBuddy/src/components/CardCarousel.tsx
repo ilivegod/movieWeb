@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router";
 
 interface EmblaCarouselProps {
   slides: Slide[];
 }
 
 interface Slide {
-  poster_path: string;
-  original_title: string;
-  title: string;
-  description: string;
+  poster_path?: string;
+  original_title?: string;
+  title?: string;
+  description?: string;
+  id?: string;
+  poster?: string;
 }
 
 const CardCarousel: React.FC<EmblaCarouselProps> = ({ slides }) => {
+  let navigate = useNavigate();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -48,6 +53,10 @@ const CardCarousel: React.FC<EmblaCarouselProps> = ({ slides }) => {
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
+  const handleCardClick = (id: string) => {
+    console.log("id:", id);
+  };
+
   return (
     <div className="relative max-w-screen-xl   ">
       <div className="overflow-hidden" ref={emblaRef}>
@@ -57,7 +66,10 @@ const CardCarousel: React.FC<EmblaCarouselProps> = ({ slides }) => {
               className="flex-[0_0_100%] min-w-0 pl-4 sm:flex-[0_0_50%] md:flex-[0_0_33.33%] lg:flex-[0_0_25%]"
               key={index}
             >
-              <div className="bg-transparent  shadow-md overflow-hidden ">
+              <button
+                onClick={() => navigate(`/movieDetails/${slide.id}`)}
+                className="bg-transparent  shadow-md overflow-hidden "
+              >
                 <div className=" relative h-44 sm:h-56 md:h-64 lg:h-72 border rounded-xl border-gray-500">
                   <img
                     src={`https://media.themoviedb.org/t/p/w600_and_h900_bestv2/${slide.poster_path}`}
@@ -70,7 +82,7 @@ const CardCarousel: React.FC<EmblaCarouselProps> = ({ slides }) => {
                     {slide.title}
                   </h2>
                 </div>
-              </div>
+              </button>
             </div>
           ))}
         </div>
